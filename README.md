@@ -6,10 +6,21 @@ Infant movement based diagnostics
 Python3 Modules to install: numpy, pandas, keras, tensorflow-gpu, glob, os, json, itertools, cv2, matplotlib, math, io, PIL, IPython, scipy
 
 ## Compute and visualize pose model error
-Compute the error of the trained pose model with respect to the ground-truth pose data (images and labels)
+Compute the error of the trained pose model with respect to the ground-truth pose data (images and labels). Compare to original model
 - In `src/data/get_pose_model_predictions_and_groundtruth.py`, set paths 
-- To generate model predictions, run `python3 src/data/get_pose_model_predictions_and_groundtruth.py` 
+- Add models to `models/` folder
+- To generate model predictions, run `python3 src/data/get_pose_model_predictions_and_groundtruth.py`. This outputs model predictions and ground truth labels in a dataframe (`data/pose_model`) and images with predictions.  
 - To compute and visualize model error, run notebook `notebooks/visualize_pose_model_error.ipynb`
+
+
+## To do
+- add all folders in local repo to git, including empty
+- load, process, kinematic variables, features, plotting
+- load, process, kinematic variables, for clinical data
+
+- add data to google drive
+- file with urls to google drive
+- what to do with paths in repo?
 
 
 
