@@ -17,6 +17,8 @@ def main(data_set, raw_pose_estimates_video_path):
             df_fps = get_video_information_yt(raw_pose_estimates_video_path)
         elif data_set == 'clinical':
             df_fps = get_video_information_clinical(raw_pose_estimates_video_path)
+        else:
+            df_fps = get_video_information_yt(raw_pose_estimates_video_path)
         df_fps.to_pickle(os.path.join(pose_estimates_path, 'video_info.pkl'))
     else:
         df_fps = pd.read_pickle(os.path.join(pose_estimates_path, 'video_info.pkl')) 
