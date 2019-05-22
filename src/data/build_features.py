@@ -12,7 +12,7 @@ def angle_features(df):
     # - absolute angle
     a_mean = np.degrees(CS.nanmean(np.array(np.radians(df['angle']))))
     # - variability of angle
-    a_var = np.degrees(CS.nanvar(np.array(np.radians(df['angle']))))
+    a_stdev = np.sqrt(np.degrees(CS.nanvar(np.array(np.radians(df['angle'])))))
     # - measure of complexity (entropy)
     a_ent = ent(df['angle'].round())
     # - median absolute velocity
@@ -23,7 +23,7 @@ def angle_features(df):
     IQR_acc = df['acceleration'].quantile(.75) - df['acceleration'].quantile(.25)
 
     return pd.DataFrame.from_dict({'video':np.unique(df.video),'bp':np.unique(df.bp),\
-    'mean_angle':a_mean, 'variance_angle':a_var, 'entropy_angle':a_ent,
+    'mean_angle':a_mean, 'stdev_angle':a_stdev, 'entropy_angle':a_ent,
     'median_vel_angle':median_vel,'IQR_vel_angle':IQR_vel,\
     'IQR_acc_angle': IQR_acc})
 

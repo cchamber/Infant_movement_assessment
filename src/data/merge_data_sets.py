@@ -15,20 +15,15 @@ def main():
 
     # meta data youtube
     # id: unique id per infant
-    # rated age in total weeks and total months
+    # rated age in weeks
     meta_data_yt = pd.read_pickle(os.path.join(meta_data_path, 'meta_data_yt.pkl'))
-    id_yt = pd.read_pickle(os.path.join(meta_data_path,'infant_id_yt.pkl'))
-    meta_data_yt['video'] = meta_data_yt.Video.str[:-4]
-    meta_data_yt = meta_data_yt.drop(['total_months','Video','rater', 'Months', 'Weeks', 'Unnamed: 0'],axis=1)
-    meta_data_yt.columns = ['age_in_weeks', 'video']
-    id_yt['video'] = id_yt.video.str[:-4]
-    meta_data_yt = pd.merge(meta_data_yt,id_yt, on='video', how='outer')
     yt = pd.merge(yt,meta_data_yt, on='video', how='inner')
 
     # meta data clinical
     # id: unique id per infant
-    # age (corrected and chronological), risk, pre-term
+    # age (corrected and chronological), risk
     meta_data_clin = pd.read_pickle(os.path.join(meta_data_path,'meta_data_clin.pkl'))
+    
     info_series = pd.Series([i.replace('-', '_').split('_') for i in clin.video])
     info_df = info_series.apply(pd.Series)
     info_df.columns = ['dum', 'infant', 'session', 'trial', 'GP', 'edited']
@@ -51,7 +46,6 @@ def main():
     meta_data_clin['age_in_weeks'] = meta_data_clin['Months_corr']*4 + meta_data_clin['Days_corr']/7 # corrected age for preterm infants
     meta_data_clin.loc[meta_data_clin.age_in_weeks.isnull(),'age_in_weeks'] = meta_data_clin.loc[meta_data_clin.age_in_weeks.isnull(), 'chron_age']
     meta_data_clin = meta_data_clin[['infant','session' ,'risk', 'age_in_weeks']]
-    meta_data_clin = meta_data_clin.loc[~np.isin(meta_data_clin.infant, np.array([28,29,32,33])),:]
     clin['infant'] = clin.infant.astype(int)
     clin['session'] = clin.session.astype(int)
     clin = pd.merge(clin, meta_data_clin, on=['infant', 'session'], how='inner')
