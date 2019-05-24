@@ -1,7 +1,7 @@
 # Infant pose estimation and infant movement-based assessment
 
 
-<img src="image/pose_estimates.jp2“ width="500" align="middle">
+<img src='image/pose_estimates.png' align="middle">
 
 
 ## Project Contributors
@@ -10,10 +10,6 @@ Nidhi Seethapathi snidhi@seas.upenn.edu
 Rachit Saluja rsaluja@seas.upenn.edu  
 Michelle Johnson johnmic@pennmedicine.upenn.edu  
 Konrad Kording kording@seas.upenn.edu  
-
-
-## Link to data
-https://figshare.com/s/10034c230ad9b2b2a6a4 . 
 
 Directory structure
 ------------
@@ -66,6 +62,9 @@ Option to examine success in extracting pose from labelled data
 - Measurement of pose model error with respect to ground truth data (notebooks/master.ipynb,
 notebooks/visualize_pose_model_error.ipynb)
 
+## Link to model and data
+https://figshare.com/s/10034c230ad9b2b2a6a4 . 
+
 ## 1. Set up
 ### Requirements
  numpy, pandas, glob, os, json, itertools, cv2, matplotlib, math, io, PIL, IPython, scipy  
@@ -107,16 +106,18 @@ Run the second cell. Pose estimates and videos with overlaid pose are output to 
 
 ## 4. Compare movement of at-risk infants with normative database of healthy infant movement
 Stages of the analysis:
-1. Extract pose data from .pkl files, only include key points that are part of a skeleton, only include the skeleton with the most keypoints present.
-2a. Pre-process data: interpolate and smooth raw pose estimates. Process each video so that all data can be compared. Rotate upper body w.r.t. angle of line connecting shoulders, and lower body w.r.t. angle of line connecting hips. Normalize skeleton by trunk length (distance between center of hips and center of shoulder). Compute time series of joint angles (shoulders, hips, knees, elbows). Compute dynamics. 
-2b. Visualize normalized pose data as animations. 
+1. Extract pose data from .pkl files, only include key points that are part of a skeleton, only include the skeleton with the most keypoints present.  
+2. a. Pre-process data: interpolate and smooth raw pose estimates. Process each video so that all data can be compared. Rotate upper body w.r.t. angle of line connecting shoulders, and lower body w.r.t. angle of line connecting hips. Normalize skeleton by trunk length (distance between center of hips and center of shoulder). Compute time series of joint angles (shoulders, hips, knees, elbows). Compute dynamics.  
+b. Visualize normalized pose data as animations.  
 3. Build kinematic features: Pre-registered features are described [here](https://osf.io/hv7tm/)   
 4. Merge data sets: combine lab-collected data from at-risk infants and youtube data. Merge features with meta data (rated age in weeks for YouTube data, age in weeks and risk assessment for at-risk infants)
 5. Compute [Gaussian naive Bayes surprise metric](https://en.wikipedia.org/wiki/Naive_Bayes_classifier#Gaussian_naive_Bayes) for all data w.r.t the normative database of healthy movement. 
 6. Visualize results  
 
 Open notebook `notebooks/master.ipynb`.  
-To Extract pose data, Pre-process data, Build kinematic features (stages 1-3 above), run cells 1,3, and 4.   If running pipeline from data provided on figshare, in cells 3 and 4 comment line 6: `load_pose_data.main(data_set, raw_pose_estimates_video_path)`   If running the pipeline based on output of `Get_pose_estimates_from_video.ipynb` include line 6 of cells 3 and 4 and add meta data to data/video_meta_data.  
+To Extract pose data, Pre-process data, Build kinematic features (stages 1-3 above), run cells 1,3, and 4.  
+If running pipeline from data provided on figshare, in cells 3 and 4 comment line 6: `load_pose_data.main(data_set, raw_pose_estimates_video_path)`  
+If running the pipeline based on output of `Get_pose_estimates_from_video.ipynb` include line 6 of cells 3 and 4 and add meta data to data/video_meta_data.  
 Visualize normalized pose data as animations. Run notebook notebooks/visualize_pose_data. Select data set in Cell 1: `data_set = 'clinical’` or `data_set = ‘youtube’`. This code saves animations to data/pose_estimates/[youtube] or [clinical]/video  
 To Merge data sets and Compute Gaussian naive Bayes surprise (stage 4 and 5), run cell 5.  
 To visualize results run notebook, `notebooks/visualize_results.ipynb`  
