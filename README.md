@@ -41,8 +41,8 @@ Directory structure
 ## Motivation
 Infant movement-based assessments identify infants at risk for neuromotor diseases. Existing tests are based on visual inspection of infant movement by clinicians and are not widely available. Population screening would identify a greater number of at-risk infants. To do population screening, we need automated tests.
 
-## Project
-Here we provide methods to automate movement-based assessments for infants using video analysis of infant movement.
+## Objectives
+Our objective is to provide methods to automate movement-based assessments for infants using video analysis of infant movement.
 We provide:
 - A pose estimation model trained to extract infant pose from videos
 - A normative database of infant pose and movement
@@ -64,7 +64,7 @@ Option to examine success in extracting pose from labelled data
 - Measurement of pose model error with respect to ground truth data (notebooks/master.ipynb,
 notebooks/visualize_pose_model_error.ipynb)
 
-# Set up
+# 1. Set up
 ## Requirements
  numpy, pandas, glob, os, json, itertools, cv2, matplotlib, math, io, PIL, IPython, scipy  
 For testing pose model: Cuda 8, cudnn 6, keras 2.2.4, tensorflow-gpu 1.4.0
@@ -74,7 +74,7 @@ For testing pose model: Cuda 8, cudnn 6, keras 2.2.4, tensorflow-gpu 1.4.0
 
 Download [repo.zip](https://figshare.com/s/10034c230ad9b2b2a6a4) from Figshare. Unzip. Add `data` and `models` folders to main directory  
 
-# Measurement of pose model error
+# 2. Measurement of pose model error
 Compare performance of pose estimation models, e.g. before and after transfer learning.  
 Compute and visualize error of trained pose estimation model using ground truth data (images and key point labels in [COCO format](www.cocodataset.org/).  
 Requires ground-truth data (images and joint position labels). Ground truth labelled data is not provided here.  
@@ -93,7 +93,7 @@ Performance is quantified by the rmse, precision, and recall.
 We compute rmse normalized by bounding box size. RMSE is computed only for key points which are both in the ground truth data set and model predictions.  
 
 
-# Extract pose from videos 
+# 3. Extract pose from videos 
 Download [pose_extraction.zip](https://figshare.com/s/10034c230ad9b2b2a6a4) and add `colab_openpose` to Google Drive  
 Open `Get_pose_estimates_from_video.ipynb` with Google Colab    
 Add videos for pose estimation to `colab_openpose/videos`  
@@ -103,7 +103,7 @@ Follow instructions in the notebook.
 Run the first cell of the notebook. Then go to the URL as instructed, connect to google account, and enter the generated authorization code in the notebook.  
 Run the second cell. Pose estimates and videos with overlaid pose are output to the `output_files` folder.  Keep window open while code is running.
 
-# Compare movement of at-risk infants with normative database of healthy infant movement
+# 4. Compare movement of at-risk infants with normative database of healthy infant movement
 Stages of the analysis:
 1. Extract pose data from .pkl files, only include key points that are part of a skeleton, only include the skeleton with the most keypoints present.
 2. Pre-process data: interpolate and smooth raw pose estimates. Process each video so that all data can be compared. Rotate upper body w.r.t. angle of line connecting shoulders, and lower body w.r.t. angle of line connecting hips. Normalize skeleton by trunk length (distance between center of hips and center of shoulder). Compute time series of joint angles (shoulders, hips, knees, elbows).
