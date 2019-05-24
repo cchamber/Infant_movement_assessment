@@ -15,7 +15,7 @@ Directory structure
 ------------
 
     ├── README.md  
-    ├── data (Download [here] (https://figshare.com/s/10034c230ad9b2b2a6a4))  
+    ├── data (Download [here] (https://figshare.com/s/))  
     │   ├── example_video  
     │   ├── interim  
     │   ├── pose_estimates  
@@ -23,7 +23,7 @@ Directory structure
     │   ├── processed  
     │   ├── video_meta_data  
     │   └── visualization  
-    ├──models (Download [here] (https://figshare.com/s/10034c230ad9b2b2a6a4))  
+    ├──models (Download [here] (https://figshare.com/s/))  
     ├── notebooks  
     ├──src  
     │   ├──  data  
@@ -47,12 +47,12 @@ We provide:
 - Movement data from at-risk infants
 
 ## Data
-To create a normative database of healthy infant movement, we collected video data of infants on YouTube (video URLs and  infant pose data [here](https://figshare.com/s/10034c230ad9b2b2a6a4)). To validate our approach, we recorded infants at different levels of neuromotor risk collected in the laboratory (infant pose data [here](https://figshare.com/s/10034c230ad9b2b2a6a4)).
+To create a normative database of healthy infant movement, we collected video data of infants on YouTube (video URLs and  infant pose data [here](https://figshare.com/s/)). To validate our approach, we recorded infants at different levels of neuromotor risk collected in the laboratory (infant pose data [here](https://figshare.com/s/)).
 
 ## Pipeline
 
 #### Infant movement-based assessment
-- Extract pose from videos ([pose_extraction.zip](https://figshare.com/s/10034c230ad9b2b2a6a4))
+- Extract pose from videos ([pose_extraction.zip](https://figshare.com/s/))
 - Compare movement of at-risk infants with normative database (notebooks/master.ipynb, notebooks/visualize_results.ipynb) using pre-registered set of kinematic features, [here](https://osf.io/hv7tm/)
 - The user can run the pipeline using new data or the data collected for this project. Pose data and infant meta data are stored in `data/video_meta_data`, `data/pose_estimates/youtube/py` and `data/pose_estimates/clinical/py`.
 
@@ -73,7 +73,7 @@ For testing pose model: Cuda 8, cudnn 6, keras 2.2.4, tensorflow-gpu 1.4.0
 ### Clone repo and download figshare data
 `git clone https://github.com/cchamber/Infant_movement_assessment`
 
-Download [repo.zip](https://figshare.com/s/10034c230ad9b2b2a6a4) from Figshare. Unzip. Add `data` and `models` folders to main directory  
+Download [repo.zip](https://figshare.com/s/) from Figshare. Unzip. Add `data` and `models` folders to main directory  
 
 ## 2. Measurement of pose model error
 Compare performance of pose estimation models, e.g. before and after transfer learning.  
@@ -95,7 +95,7 @@ We compute RMSE normalized by bounding box size. RMSE is computed only for key p
 
 
 ## 3. Extract pose from videos 
-Download [pose_extraction.zip](https://figshare.com/s/10034c230ad9b2b2a6a4) and add `colab_openpose` to Google Drive  
+Download [pose_extraction.zip](https://figshare.com/s/) and add `colab_openpose` to Google Drive  
 Open `Get_pose_estimates_from_video.ipynb` with Google Colab    
 Add videos for pose estimation to `colab_openpose/videos`  
 The notebook will use the model `model.h5` in `colab_openpose/videos` to generate pose estimates. The `model.h5` file was trained with infant data. `trained_model.h5` is a copy of the infant pose model. The original cmu model (`original_cmu_model.h5`) can be used by renaming `original_cmu_model.h5` to `model.h5`.  
