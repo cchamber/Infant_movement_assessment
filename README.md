@@ -63,7 +63,7 @@ Option to examine success in extracting pose from labelled data
 notebooks/visualize_pose_model_error.ipynb)
 
 ## Link to model and data
-https://figshare.com/s/10034c230ad9b2b2a6a4 . 
+https://figshare.com/s/   
 
 ## 1. Set up
 ### Requirements
