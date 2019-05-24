@@ -90,5 +90,15 @@ In `notebooks/master.ipynb`, run cells 1 and 2.
 Run `notebooks/visualize_pose_model_error.ipynb`  
 
 Performance is quantified by the rmse, precision, and recall.  
-We compute rmse in bounding box units for key points which are both in the ground truth data set and model predictions.  
+We compute rmse normalized by bounding box size. RMSE is computed only for keypoints which are both in the ground truth data set and model predictions.  
 
+
+# Extract pose from videos 
+Download [pose_extraction.zip](https://figshare.com/s/10034c230ad9b2b2a6a4) and add `colab_openpose` to Google Drive  
+Open `Get_pose_estimates_from_video.ipynb` with Google Colab    
+Add videos for pose estimation to `colab_openpose/videos`  
+The notebook will use the model `model.h5` in `colab_openpose/videos` to generate pose estimates. The `model.h5` file was trained with infant data. `trained_model.h5` is a copy of the infant pose model. The original cmu model (`original_cmu_model.h5`) can be used by renaming it to `model.h5`.  
+
+Follow instructions in the notebook.  
+Run the first cell of the notebook. Then go to the URL as instructed, connect to google account, and enter the generated authorization code in the notebook.  
+Run the second cell. Pose estimates and videos with overlaid pose are output to the `output_files` folder.  
