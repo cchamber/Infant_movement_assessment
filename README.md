@@ -82,11 +82,11 @@ Requires ground-truth data (images and joint position labels). Ground truth labe
 ## Get model predictions and load ground truth
 - `src/pose_model/get_model_predictions_and_groundtruth.py`, line 61-80. Set the file paths to label ground-truth data, image data, and model files.
 
-- Load ground-truth label data, generate model predictions and save images with predicted pose:
+Load ground-truth label data, generate model predictions and save images with predicted pose:  
 In `notebooks/master.ipynb`, run cells 1 and 2. Check that code uses GPUs.
 
 ## Compute and visualize pose model error
-- Compute model error and visualize model error:
+Compute model error and visualize model error:  
 Run `notebooks/visualize_pose_model_error.ipynb`  
 
 Performance is quantified by the rmse, precision, and recall.  
