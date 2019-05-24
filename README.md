@@ -1,7 +1,7 @@
 # Infant pose estimation and infant movement-based assessment
 
 
-<img src="path/to/image“ width="500" align="middle">
+<img src="image/pose_estimates.jp2“ width="500" align="middle">
 
 
 ## Project Contributors
@@ -45,18 +45,20 @@ Infant movement-based assessments identify infants at risk for neuromotor diseas
 Our objective is to provide methods to automate movement-based assessments for infants using video analysis of infant movement.
 We provide:
 - A pose estimation model trained to extract infant pose from videos
-- A normative database of infant pose and movement
-- A pipeline to retrain a neural network using ground-truth data
+- A pipeline to retrain a neural network using ground-truth pose data
 - A pipeline to extract pose from videos, and statistically compares at-risk infants to a normative database of infant movement
+- A normative database of infant movement
+- Movement data from at-risk infants
 
 ## Data
 To create a normative database of healthy infant movement, we collected video data of infants on YouTube (video URLs and  infant pose data [here](https://figshare.com/s/10034c230ad9b2b2a6a4)). To validate our approach, we recorded infants at different levels of neuromotor risk collected in the laboratory (infant pose data [here](https://figshare.com/s/10034c230ad9b2b2a6a4)).
 
 ## Pipeline
 
-#### Infant movement based assessment
+#### Infant movement-based assessment
 - Extract pose from videos ([pose_extraction.zip](https://figshare.com/s/10034c230ad9b2b2a6a4))
 - Compare movement of at-risk infants with normative database (notebooks/master.ipynb, notebooks/visualize_results.ipynb) using pre-registered set of kinematic features, [here](https://osf.io/hv7tm/)
+- The user can run the pipeline using new data or the data collected for this project. Pose data and infant meta data are stored in `data/video_meta_data`, `data/pose_estimates/youtube/py` and `data/pose_estimates/clinical/py`.
 
 #### Pose estimation model
 Option to examine success in extracting pose from labelled data
@@ -64,36 +66,36 @@ Option to examine success in extracting pose from labelled data
 - Measurement of pose model error with respect to ground truth data (notebooks/master.ipynb,
 notebooks/visualize_pose_model_error.ipynb)
 
-# 1. Set up
-## Requirements
+## 1. Set up
+### Requirements
  numpy, pandas, glob, os, json, itertools, cv2, matplotlib, math, io, PIL, IPython, scipy  
 For testing pose model: Cuda 8, cudnn 6, keras 2.2.4, tensorflow-gpu 1.4.0
 
-## Clone repo and download figshare data
+### Clone repo and download figshare data
 `git clone https://github.com/cchamber/Infant_movement_assessment`
 
 Download [repo.zip](https://figshare.com/s/10034c230ad9b2b2a6a4) from Figshare. Unzip. Add `data` and `models` folders to main directory  
 
-# 2. Measurement of pose model error
+## 2. Measurement of pose model error
 Compare performance of pose estimation models, e.g. before and after transfer learning.  
 Compute and visualize error of trained pose estimation model using ground truth data (images and key point labels in [COCO format](www.cocodataset.org/).  
 Requires ground-truth data (images and joint position labels). Ground truth labelled data is not provided here.  
 
-## Get model predictions and load ground truth
-- `src/pose_model/get_model_predictions_and_groundtruth.py`, line 61-80. Set the file paths to label ground-truth data, image data, and model files.
+### Get model predictions and load ground truth
+`src/pose_model/get_model_predictions_and_groundtruth.py`, line 61-80. Set the file paths to label ground-truth data, image data, and model files.
 
 Load ground-truth label data, generate model predictions and save images with predicted pose:  
 In `notebooks/master.ipynb`, run cells 1 and 2. Check that code uses GPUs.
 
-## Compute and visualize pose model error
+### Compute and visualize pose model error
 Compute model error and visualize model error:  
 Run `notebooks/visualize_pose_model_error.ipynb`  
 
-Performance is quantified by the rmse, precision, and recall.  
-We compute rmse normalized by bounding box size. RMSE is computed only for key points which are both in the ground truth data set and model predictions.  
+Performance is quantified by the RMSE, precision, and recall.  
+We compute RMSE normalized by bounding box size. RMSE is computed only for key points which are both in the ground truth data set and model predictions.  
 
 
-# 3. Extract pose from videos 
+## 3. Extract pose from videos 
 Download [pose_extraction.zip](https://figshare.com/s/10034c230ad9b2b2a6a4) and add `colab_openpose` to Google Drive  
 Open `Get_pose_estimates_from_video.ipynb` with Google Colab    
 Add videos for pose estimation to `colab_openpose/videos`  
@@ -103,18 +105,18 @@ Follow instructions in the notebook.
 Run the first cell of the notebook. Then go to the URL as instructed, connect to google account, and enter the generated authorization code in the notebook.  
 Run the second cell. Pose estimates and videos with overlaid pose are output to the `output_files` folder.  Keep window open while code is running.
 
-# 4. Compare movement of at-risk infants with normative database of healthy infant movement
+## 4. Compare movement of at-risk infants with normative database of healthy infant movement
 Stages of the analysis:
 1. Extract pose data from .pkl files, only include key points that are part of a skeleton, only include the skeleton with the most keypoints present.
-2. Pre-process data: interpolate and smooth raw pose estimates. Process each video so that all data can be compared. Rotate upper body w.r.t. angle of line connecting shoulders, and lower body w.r.t. angle of line connecting hips. Normalize skeleton by trunk length (distance between center of hips and center of shoulder). Compute time series of joint angles (shoulders, hips, knees, elbows).
+2a. Pre-process data: interpolate and smooth raw pose estimates. Process each video so that all data can be compared. Rotate upper body w.r.t. angle of line connecting shoulders, and lower body w.r.t. angle of line connecting hips. Normalize skeleton by trunk length (distance between center of hips and center of shoulder). Compute time series of joint angles (shoulders, hips, knees, elbows). Compute dynamics. 
+2b. Visualize normalized pose data as animations. 
 3. Build kinematic features: Pre-registered features are described [here](https://osf.io/hv7tm/)   
 4. Merge data sets: combine lab-collected data from at-risk infants and youtube data. Merge features with meta data (rated age in weeks for YouTube data, age in weeks and risk assessment for at-risk infants)
 5. Compute [Gaussian naive Bayes surprise metric](https://en.wikipedia.org/wiki/Naive_Bayes_classifier#Gaussian_naive_Bayes) for all data w.r.t the normative database of healthy movement. 
 6. Visualize results  
 
 Open notebook `notebooks/master.ipynb`.  
-To Extract pose data, Pre-process data, Build kinematic features (stages 1-3 above), run cells 1,3, and 4.  
-If running pipeline from data provided on figshare, in cells 3 and 4 comment line 6: `load_pose_data.main(data_set, raw_pose_estimates_video_path)`  
-If running the pipeline based on output of `Get_pose_estimates_from_video.ipynb` include line 6 of cells 3 and 4 and add meta data to data/video_meta_data.  
+To Extract pose data, Pre-process data, Build kinematic features (stages 1-3 above), run cells 1,3, and 4.   If running pipeline from data provided on figshare, in cells 3 and 4 comment line 6: `load_pose_data.main(data_set, raw_pose_estimates_video_path)`   If running the pipeline based on output of `Get_pose_estimates_from_video.ipynb` include line 6 of cells 3 and 4 and add meta data to data/video_meta_data.  
+Visualize normalized pose data as animations. Run notebook notebooks/visualize_pose_data. Select data set in Cell 1: `data_set = 'clinical’` or `data_set = ‘youtube’`. This code saves animations to data/pose_estimates/[youtube] or [clinical]/video  
 To Merge data sets and Compute Gaussian naive Bayes surprise (stage 4 and 5), run cell 5.  
 To visualize results run notebook, `notebooks/visualize_results.ipynb`  
