@@ -55,7 +55,7 @@ To create a normative database of healthy infant movement, we collected video da
 ## Pipeline
 
 #### Infant movement based assessment
-- Extract pose from videos (Figshare link, pose_extraction.zip)
+- Extract pose from videos ([pose_extraction.zip](https://figshare.com/s/10034c230ad9b2b2a6a4))
 - Compare movement of at-risk infants with normative database (notebooks/master.ipynb, notebooks/visualize_results.ipynb) using pre-registered set of kinematic features, [here](https://osf.io/hv7tm/)
 
 #### Pose estimation model
