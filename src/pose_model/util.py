@@ -38,7 +38,7 @@ def get_skel(df):
     return kp_df
 
 def config_reader():
-    path = '../../models/config'
+    path = '../models/config'
     config = ConfigObj(path)    
     param = config['param']
     model_id = param['modelID']
@@ -357,7 +357,7 @@ def padRightDownCorner(img, stride, padValue):
         
 
 def get_prediction(keras_weights_file, model_name, save_images, image_path):
-    image_save_path = os.path.join('../../data/pose_model/images', model_name)
+    image_save_path = os.path.join('../data/pose_model/images', model_name)
     if os.path.isdir(image_save_path)!=1:
         os.mkdir(image_save_path)
     image_list = glob.glob(os.path.join(image_path,'*'))

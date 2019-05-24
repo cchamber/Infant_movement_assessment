@@ -62,12 +62,16 @@ def main():
     save_images = 1
     image_path = '/data2/clairec/infant_NN_training_dataset/val_all_100818_1inf_step1'
     gt_path = '/data2/clairec/infant_NN_training_dataset/person_keypoints_val_all_100818_1inf_step1.json'
-    keras_weights_files = ['../../models/cmu_model.h5', '../../models/trained_model_oct.h5']
+    keras_weights_files = ['../models/cmu_model.h5', '../models/trained_model_oct.h5']
     model_names = ['original_model', 'trained_model']
-
+    image_prediction_path = '../data/pose_model/images'
+    for i in model_names:
+        if os.path.isdir(os.path.join(image_prediction_path, i))==False:
+            os.mkdir(os.path.join(image_prediction_path, i))
+            
     gt_pred_df = get_groundtruth_and_predictions(save_images, image_path, gt_path, keras_weights_files, model_names)
 
-    gt_pred_df.to_pickle('../../data/pose_model/model_predictions_and_groundtruth.pkl')
+    gt_pred_df.to_pickle('../data/pose_model/model_predictions_and_groundtruth.pkl')
 
 if __name__ == '__main__':
     main()
