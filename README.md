@@ -81,7 +81,7 @@ Compute and visualize error of trained pose estimation model using ground truth 
 Requires ground-truth data (images and joint position labels). Ground truth labelled data is not provided here.  
 
 ### Get model predictions and load ground truth
-`src/pose_model/get_model_predictions_and_groundtruth.py`, line 61-80. Set the file paths to label ground-truth data, image data, and model files.
+`src/pose_model/get_model_predictions_and_groundtruth.py`, lines 62-67. Set the file paths to label ground-truth data, image data, and model files. To save images overlaid with predictions, set save_images (1 to save images, 0 to not save images). 
 
 Load ground-truth label data, generate model predictions and save images with predicted pose:  
 In `notebooks/master.ipynb`, run cells 1 and 2. Check that code uses GPUs.
