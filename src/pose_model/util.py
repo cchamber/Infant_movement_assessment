@@ -361,21 +361,21 @@ def get_prediction(keras_weights_file, model_name, save_images, image_path):
     if os.path.isdir(image_save_path)!=1:
         os.mkdir(image_save_path)
     image_list = glob.glob(os.path.join(image_path,'*'))
-
+    print('loading model')
     model = get_testing_model()
+    print('loading weights')
     model.load_weights(keras_weights_file)
+    print('config')
     params, model_params = config_reader()
-    
-    # loop through image files
-#     image_list = image_list[:2]
 
     df = pd.DataFrame()
+    print('processing images')
     for input_image in image_list:
         image_id = os.path.basename(input_image)[:-4]
         video_number = image_id[1:7]
         frame_number = image_id[7:]
         try:
-            output_dict = process(input_image, params, model_params, model) # {'peaks':all_peaks,'canvas':canvas,'limbs_subset':subset,'limbs_candidate':candidate}
+            output_dict = process(input_image, params, model_params, model) 
             frame = output_dict['canvas']
             if save_images == 1:
                 cv2.imwrite(os.path.join(image_save_path,image_id+'.jpg'), frame)

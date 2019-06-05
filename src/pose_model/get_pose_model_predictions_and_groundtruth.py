@@ -25,13 +25,16 @@ def get_groundtruth_and_predictions(save_images, image_path, gt_path, keras_weig
     bbox_df = gt_df.bbox.apply(pd.Series); bbox_df.columns = ['left', 'bottom', 'width', 'height']
     bbox_df['id'] = gt_df['id'].astype(str).str[:-2].astype(int)
     bbox_df['bbox_diag'] = np.sqrt(bbox_df.width**2+bbox_df.height**2)
-    kp_gt_df = pd.merge(kp_gt_df, bbox_df[['id', 'bbox_diag']], on='id', how='left')
+    kp_gt_df = pd.merge(kp_gt_df, bbox_df[['id', 'bbox_diag','width', 'height']], on='id', how='left')
     kp_gt_df.loc[kp_gt_df.x_gt==0, 'x_gt'] = np.nan
     kp_gt_df.loc[kp_gt_df.y_gt==0, 'y_gt'] = np.nan
 
     # get prediction
     pred_df = pd.DataFrame()
     for i, (iweight, imodel) in enumerate(zip(keras_weights_files, model_names)):
+        print('gen prediction for..')
+        print(iweight)
+        print(imodel)
         zdf = get_prediction(iweight, imodel, save_images, image_path)
         if i ==0:
             pred_df = zdf.reset_index()
@@ -44,8 +47,8 @@ def get_groundtruth_and_predictions(save_images, image_path, gt_path, keras_weig
 
     gt_pred_df = pd.merge(gt_df_merge, pred_df, on=['id','part_label'], how = 'outer')
 
-    bbox = bbox_df[['id','bbox_diag']]
-    columns = pd.MultiIndex.from_arrays([['id','ground_truth'],['','bbox_diag']], names=['var_type','dim'])
+    bbox = bbox_df[['id','bbox_diag','width', 'height']]
+    columns = pd.MultiIndex.from_arrays([['id','ground_truth', 'ground_truth', 'ground_truth'],['','bbox_diag','bbox_width', 'bbox_height']], names=['var_type','dim'])
     bbox.columns = columns
     gt_pred_df = pd.merge(gt_pred_df, bbox, on='id', how='outer')
     gt_pred_df['frame', ''] = gt_pred_df['id', ''].astype(str).str[7:]
@@ -60,17 +63,17 @@ def get_groundtruth_and_predictions(save_images, image_path, gt_path, keras_weig
 
 def main():
     save_images = 1
-    image_path = '/data2/clairec/infant_NN_training_dataset/val_all_100818_1inf_step1'
-    gt_path = '/data2/clairec/infant_NN_training_dataset/person_keypoints_val_all_100818_1inf_step1.json'
-    keras_weights_files = ['../models/cmu_model.h5', '../models/trained_model_oct.h5']
-    model_names = ['original_model', 'trained_model']
+    print('load paths')     
+    image_path = '/data2/Johnson_lab_files/NN_infant_labels/training_data/youtube_and_clinical_openpose_training_data/val_all_0519_1inf_step1_shuffle'
+    gt_path = '/data2/Johnson_lab_files/NN_infant_labels/training_data/youtube_and_clinical_openpose_training_data/person_keypoints_val_all_0519_1inf_step1_shuffle.json'
+    keras_weights_files = ['../models/cmu_model.h5','../models/trained_model.h5']
+    model_names = ['original_model','trained_model']
+    
     image_prediction_path = '../data/pose_model/images'
     for i in model_names:
         if os.path.isdir(os.path.join(image_prediction_path, i))==False:
             os.mkdir(os.path.join(image_prediction_path, i))
-            
     gt_pred_df = get_groundtruth_and_predictions(save_images, image_path, gt_path, keras_weights_files, model_names)
-
     gt_pred_df.to_pickle('../data/pose_model/model_predictions_and_groundtruth.pkl')
 
 if __name__ == '__main__':

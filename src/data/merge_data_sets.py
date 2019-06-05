@@ -7,7 +7,7 @@ def main():
     meta_data_path = '../data/video_meta_data'
     save_path = '../data/processed'
 
-    age_threshold = 15 # 15 weeks
+    age_threshold = 10
 
     # features
     yt = pd.read_pickle(os.path.join(feature_path, 'features_youtube.pkl'))
