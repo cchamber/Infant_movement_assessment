@@ -31,15 +31,20 @@ def main(path):
     # - measure of complexity (entropy)
     # - measure of symmetry (left-right cross correlation)
 
-    feature_list = ['Ankle_mediandist','Wrist_mediandist','Knee_mean_angle','Elbow_mean_angle',\
-                    'Ankle_IQRdist', 'Wrist_IQRdist','Knee_stdev_angle', 'Elbow_stdev_angle',\
-                    'Ankle_medianspeed','Wrist_medianspeed',\
-                    'Ankle_IQRspeed', 'Wrist_IQRspeed',\
-                    'Ankle_medianvel','Wrist_medianvel','Knee_median_vel_angle','Elbow_median_vel_angle',\
-                    'Ankle_IQRvel','Wrist_IQRvel','Knee_IQR_vel_angle','Elbow_IQR_vel_angle',\
-                    'Ankle_IQRacc','Wrist_IQRacc','Knee_IQR_acc_angle','Elbow_IQR_acc_angle',\
-                    'Ankle_meanent', 'Wrist_meanent','Knee_entropy_angle', 'Elbow_entropy_angle',\
-                    'Ankle_lrCorr_x', 'Wrist_lrCorr_x','Knee_lrCorr_angle', 'Elbow_lrCorr_angle']
+feature_list = ['Ankle_medianx','Wrist_medianx','Ankle_mediany','Wrist_mediany',\
+                'Knee_mean_angle','Elbow_mean_angle',\
+                'Ankle_IQRx', 'Wrist_IQRx','Ankle_IQRy', 'Wrist_IQRy',\
+                'Knee_stdev_angle', 'Elbow_stdev_angle',\
+                'Ankle_medianspeed','Wrist_medianspeed',\
+                'Ankle_IQRspeed', 'Wrist_IQRspeed',\
+                'Ankle_medianvelx','Wrist_medianvelx','Ankle_medianvely','Wrist_medianvely',\
+                'Knee_median_vel_angle','Elbow_median_vel_angle',\
+                'Ankle_IQRvelx','Wrist_IQRvelx','Ankle_IQRvely','Wrist_IQRvely',\
+                'Knee_IQR_vel_angle','Elbow_IQR_vel_angle',\
+                'Ankle_IQRaccx','Wrist_IQRaccx','Ankle_IQRaccy','Wrist_IQRaccy',\
+                'Knee_IQR_acc_angle','Elbow_IQR_acc_angle',\
+                'Ankle_meanent', 'Wrist_meanent','Knee_entropy_angle', 'Elbow_entropy_angle',\
+                'Ankle_lrCorr_x', 'Wrist_lrCorr_x','Knee_lrCorr_angle', 'Elbow_lrCorr_angle']
 
     features = features.loc[np.isin(features.feature, feature_list)]
 

@@ -28,31 +28,37 @@ def angle_features(df):
     'IQR_acc_angle': IQR_acc})
 
 def xy_features(df):
-    # - absolute position/angle
-    median_dist = np.sqrt(df['x']**2+df['y']**2).median()
-    # - variability of position/angle
-    IQR_dist = np.sqrt(df['x']**2+df['y']**2).quantile(.75)-np.sqrt(df['x']**2+df['y']**2).quantile(.25)
+    # - absolute position/angle    
+    median_x = df['x'].median()
+    median_y = df['y'].median()
+    IQR_x = df['x'].quantile(.75)-df['x'].quantile(.25)
+    IQR_y = df['y'].quantile(.75)-df['y'].quantile(.25)
     # - median speed
     median_speed = df['speed'].median()
     # - variability of speed
     IQR_speed = df['speed'].quantile(.75)-df['speed'].quantile(.25) 
     # - median absolute velocity
-    median_vel = (np.abs(df['velocity_x']).median() +np.abs(df['velocity_y']).median())/2
+    median_vel_x = np.abs(df['velocity_x']).median()
+    median_vel_y = np.abs(df['velocity_y']).median()
     # - variability of velocity
-    IQR_vel = ((df['velocity_x'].quantile(.75)-df['velocity_x'].quantile(.25)) +\
-    (df['velocity_y'].quantile(.75)-df['velocity_y'].quantile(.25)))/2
+    IQR_vel_x = df['velocity_x'].quantile(.75)-df['velocity_x'].quantile(.25)
+    IQR_vel_y = df['velocity_y'].quantile(.75)-df['velocity_y'].quantile(.25)
+    
     # - variability of acceleration
-    IQR_acc = (df['acceleration_x'].quantile(.75) - df['acceleration_x'].quantile(.25))\
-    +(df['acceleration_y'].quantile(.75) - df['acceleration_y'].quantile(.25))/2
+    IQR_acc_x = df['acceleration_x'].quantile(.75) - df['acceleration_x'].quantile(.25)
+    IQR_acc_y = df['acceleration_y'].quantile(.75) - df['acceleration_y'].quantile(.25)
+    
     # - measure of complexity (entropy)
     ent_x = ent(df['x'].round(2))
     ent_y = ent(df['y'].round(2))
     mean_ent = (ent_x+ent_y)/2
     # define part and side here
     return pd.DataFrame.from_dict({'video':np.unique(df.video),'bp':np.unique(df.bp),\
-    'mediandist': median_dist, 'IQRdist': IQR_dist,\
+    'medianx': median_x, 'mediany': median_y, 'IQRx': IQR_x,'IQRy': IQR_y,\
     'medianspeed':median_speed, 'IQRspeed':IQR_speed,\
-    'medianvel':median_vel, 'IQRvel':IQR_vel,'IQRacc':IQR_acc,'meanent':mean_ent})
+    'medianvelx':median_vel_x, 'medianvely':median_vel_y,\
+    'IQRvelx':IQR_vel_x,'IQRvely':IQR_vel_y,\
+    'IQRaccx':IQR_acc_x,'IQRaccy':IQR_acc_y,'meanent':mean_ent})
 
 def ent(data):
     p_data= data.value_counts()/len(data) #  probabilities
