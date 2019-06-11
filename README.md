@@ -79,7 +79,7 @@ Download [infant_movement_assessment_repo_files.zip](https://figshare.com/s/1003
 
 ## 2. Measurement of pose model error
 Compare performance of pose estimation models, e.g. before and after transfer learning.  
-Compute and visualize error of trained pose estimation model using ground truth data (images and key point labels in [COCO format](www.cocodataset.org/).  
+Compute and visualize error of trained pose estimation model using ground truth data (images and key point labels in [COCO format](https://cocodataset.org).  
 Requires ground-truth data (images and joint position labels). Ground truth labelled data is not provided here.  
 
 ### Get model predictions and load ground truth
