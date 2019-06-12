@@ -75,7 +75,7 @@ For testing pose model: Cuda 8, cudnn 6, keras 2.2.4, tensorflow-gpu 1.4.0
 ### Clone repo and download figshare data
 `git clone https://github.com/cchamber/Infant_movement_assessment`
 
-Download [infant_movement_assessment_repo_files.zip](https://figshare.com/s/10034c230ad9b2b2a6a4) from Figshare. Unzip. Add `data` and `models` folders to main directory  
+Download [infant_movement_assessment_repo_files.zip](https://figshare.com/s/10034c230ad9b2b2a6a4) from Figshare. Unzip. Add `data` and `models` folders to the `Infant_movement_assessment` directory  
 
 ## 2. Measurement of pose model error
 Compare performance of pose estimation models, e.g. before and after transfer learning.  
