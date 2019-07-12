@@ -30,8 +30,9 @@ def main(path):
     # - variability of acceleration
     # - measure of complexity (entropy)
     # - measure of symmetry (left-right cross correlation)
+    
 
-feature_list = ['Ankle_medianx','Wrist_medianx','Ankle_mediany','Wrist_mediany',\
+    feature_list = ['Ankle_medianx','Wrist_medianx','Ankle_mediany','Wrist_mediany',\
                 'Knee_mean_angle','Elbow_mean_angle',\
                 'Ankle_IQRx', 'Wrist_IQRx','Ankle_IQRy', 'Wrist_IQRy',\
                 'Knee_stdev_angle', 'Elbow_stdev_angle',\
@@ -45,7 +46,7 @@ feature_list = ['Ankle_medianx','Wrist_medianx','Ankle_mediany','Wrist_mediany',
                 'Knee_IQR_acc_angle','Elbow_IQR_acc_angle',\
                 'Ankle_meanent', 'Wrist_meanent','Knee_entropy_angle', 'Elbow_entropy_angle',\
                 'Ankle_lrCorr_x', 'Wrist_lrCorr_x','Knee_lrCorr_angle', 'Elbow_lrCorr_angle']
-
+    
     features = features.loc[np.isin(features.feature, feature_list)]
 
     surprise = features.groupby(['infant', 'age_in_weeks','risk', 'age_bracket', 'category'])['minus_log_pfeature'].sum().reset_index()
