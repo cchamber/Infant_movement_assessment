@@ -20,24 +20,10 @@ def main(path):
     features['minus_log_pfeature'] = -1*(.5*np.log(2*np.pi*features['var_ref']) + ((features['Value']-features['mean_ref'])**2)/(2*features['var_ref']))
     features['feature'] = features.part +'_'+ features.feature_name
 
-    # We will include the following features computed from the positions of the extremities (wrists/ankles) and joint angles (elbows/knees):
-    # - absolute position/angle
-    # - variability of position/angle
-    # - median speed
-    # - variability of speed
-    # - median absolute velocity
-    # - variability of velocity
-    # - variability of acceleration
-    # - measure of complexity (entropy)
-    # - measure of symmetry (left-right cross correlation)
-    
-
     feature_list = ['Ankle_medianx','Wrist_medianx','Ankle_mediany','Wrist_mediany',\
                 'Knee_mean_angle','Elbow_mean_angle',\
                 'Ankle_IQRx', 'Wrist_IQRx','Ankle_IQRy', 'Wrist_IQRy',\
                 'Knee_stdev_angle', 'Elbow_stdev_angle',\
-                'Ankle_medianspeed','Wrist_medianspeed',\
-                'Ankle_IQRspeed', 'Wrist_IQRspeed',\
                 'Ankle_medianvelx','Wrist_medianvelx','Ankle_medianvely','Wrist_medianvely',\
                 'Knee_median_vel_angle','Elbow_median_vel_angle',\
                 'Ankle_IQRvelx','Wrist_IQRvelx','Ankle_IQRvely','Wrist_IQRvely',\

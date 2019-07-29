@@ -33,10 +33,6 @@ def xy_features(df):
     median_y = df['y'].median()
     IQR_x = df['x'].quantile(.75)-df['x'].quantile(.25)
     IQR_y = df['y'].quantile(.75)-df['y'].quantile(.25)
-    # - median speed
-    median_speed = df['speed'].median()
-    # - variability of speed
-    IQR_speed = df['speed'].quantile(.75)-df['speed'].quantile(.25) 
     # - median absolute velocity
     median_vel_x = np.abs(df['velocity_x']).median()
     median_vel_y = np.abs(df['velocity_y']).median()
@@ -55,7 +51,6 @@ def xy_features(df):
     # define part and side here
     return pd.DataFrame.from_dict({'video':np.unique(df.video),'bp':np.unique(df.bp),\
     'medianx': median_x, 'mediany': median_y, 'IQRx': IQR_x,'IQRy': IQR_y,\
-    'medianspeed':median_speed, 'IQRspeed':IQR_speed,\
     'medianvelx':median_vel_x, 'medianvely':median_vel_y,\
     'IQRvelx':IQR_vel_x,'IQRvely':IQR_vel_y,\
     'IQRaccx':IQR_acc_x,'IQRaccy':IQR_acc_y,'meanent':mean_ent})
