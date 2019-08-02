@@ -78,7 +78,7 @@ Download [infant_movement_assessment_repo_files.zip](https://figshare.com/s/1003
 
 
 ## 2. Extract pose from videos 
-Download [pose_extraction.zip](https://figshare.com/s/10034c230ad9b2b2a6a4) and add `colab_openpose` to Google Drive(add it to "My Drive")   
+Download [pose_extraction.zip](https://figshare.com/s/10034c230ad9b2b2a6a4) and extract, then add `colab_openpose` to Google Drive(add it to "My Drive")   
 Open `Get_pose_estimates_from_video.ipynb` with Google Colab ([Colab Tutorial](https://colab.research.google.com/notebooks/welcome.ipynb))  
 Add videos for pose estimation to `colab_openpose/videos`  
 The notebook will use the model `model.h5` in `colab_openpose/videos` to generate pose estimates. The `model.h5` file was trained with infant data. `trained_model.h5` is a copy of the infant pose model. The original cmu model (`original_cmu_model.h5`) can be used by renaming `original_cmu_model.h5` to `model.h5`.  
