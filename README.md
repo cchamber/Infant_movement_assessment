@@ -1,6 +1,6 @@
 # Infant pose estimation and infant movement-based assessment
 
-<img src='image/infant.gif' align="middle">
+<img src='image/infant.gif' align="middle" width="20" height="40">
 
 
 <img src='image/pose_estimates.png' align="middle">
