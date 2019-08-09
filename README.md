@@ -1,11 +1,6 @@
 # Infant pose estimation and infant movement-based assessment
 
-<p align="center">
-  <img width="200" height="300" src="image/infant.gif">
-</p>
-
 <img src='image/pose_estimates.png' align="middle">
-
 
 ## Project Contributors
 Claire Chambers clairenc@seas.upenn.edu   
@@ -90,6 +85,11 @@ Follow instructions in the notebook.
 Run the first cell of the notebook. Then go to the URL as instructed, connect to google account, and enter the generated authorization code in the notebook.  
 Run the second cell. Pose estimates and videos with overlaid pose are output to the `output_files` folder.  Keep window open while code is running.  
 On Colab, video processing will take 1 minute per second of video. Note that quality of pose estimates will increase with the quality of the input video (see example video provided for reference).  
+
+#### Example of openpose output on example video of infant
+<p align="left">
+  <img width="200" height="300" src="image/infant.gif">
+</p>
 
 ## 3. Compare movement of at-risk infants with normative database of healthy infant movement
 Stages of the analysis:
