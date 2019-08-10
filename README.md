@@ -102,7 +102,7 @@ b. Visualize normalized pose data as animations.
 6. Visualize results  
 
 Open notebook `notebooks/master.ipynb`.  
-To Extract pose data from pose-estimate files, Pre-process data, Build kinematic features (stages 1-3 above), run cells 1-3.  
+To Extract pose data from pose-estimate files, Pre-process data, Build kinematic features (stages 1-3 above), edit paths to pose data in `notebooks/master.ipynb`. Run cells 1-3.  
 - If running pipeline from data provided on figshare, in cells 2 and 3, comment line 6: `load_pose_data.main(data_set, raw_pose_estimates_video_path)`  
 - If running the pipeline based on output of `Get_pose_estimates_from_video.ipynb` include line 6 of cells 2 and 3. Add meta data to data/video_meta_data.  
 
