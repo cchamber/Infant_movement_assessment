@@ -64,8 +64,11 @@ def get_groundtruth_and_predictions(save_images, image_path, gt_path, keras_weig
 def main():
     save_images = 1
     print('load paths')     
-    image_path = '/data2/Johnson_lab_files/NN_infant_labels/training_data/youtube_and_clinical_openpose_training_data/val_all_0519_1inf_step1_shuffle'
-    gt_path = '/data2/Johnson_lab_files/NN_infant_labels/training_data/youtube_and_clinical_openpose_training_data/person_keypoints_val_all_0519_1inf_step1_shuffle.json'
+    image_path = '/path/to/image/directory'
+    gt_path = '/path/to/json/file/containing/ground/truth/labels'
+    assert os.path.exists(image_path), 'Folder does not exist. \n Edit path to ground-truth image files (image_path) in /src/pose_model/get_pose_model_predictions_and_groundtruth.py.'
+    assert os.path.exists(gt_path), 'File does not exist. \n Edit path to .json ground-truth labels (gt_path) in /src/pose_model/get_pose_model_predictions_and_groundtruth.py.'
+
     keras_weights_files = ['../models/cmu_model.h5','../models/trained_model.h5']
     model_names = ['original_model','trained_model']
     
